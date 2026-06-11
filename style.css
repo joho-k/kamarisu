@@ -11,7 +11,8 @@ html {
 
 body {
   font-family: "Zen Maru Gothic", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
-  background-color: #d4edaa;
+  background: linear-gradient(#bfe3ef 0%, #d6ebcb 30%, #d4edaa 60%, #c3e295 100%);
+  background-attachment: fixed;
   min-height: 100vh;
   padding-top: 54px;
 }
@@ -27,25 +28,28 @@ nav {
   align-items: center;
   padding: 8px 12px;
   gap: 6px;
-  background-color: #d4edaa;
-  border-bottom: 1px solid #b5d98a;
+  background: linear-gradient(#4a8042, #3a6a35);
+  border-bottom: 3px solid #2c5230;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   flex-wrap: wrap;
 }
 
 nav a {
   display: inline-block;
-  padding: 4px 10px;
-  border: 2px solid #cc4400;
-  color: #000;
+  padding: 4px 12px;
+  border: 2px solid #2c5230;
+  color: #2c5230;
   text-decoration: none;
   font-size: 14px;
-  background-color: #fff8f0;
-  border-radius: 2px;
-  transition: background-color 0.2s;
+  font-weight: 500;
+  background-color: #f4f1e0;
+  border-radius: 16px;
+  transition: background-color 0.2s, transform 0.1s;
 }
 
 nav a:hover {
-  background-color: #ffe0c0;
+  background-color: #fff8e8;
+  transform: translateY(-1px);
 }
 
 .nav-logo {
@@ -59,6 +63,7 @@ nav a:hover {
   height: 36px;
   width: auto;
   display: block;
+  mix-blend-mode: multiply;
 }
 
 /* メインコンテンツ */
@@ -78,6 +83,7 @@ main {
   max-width: 480px;
   width: 100%;
   height: auto;
+  mix-blend-mode: multiply;
 }
 
 /* キャッチコピー */
@@ -114,6 +120,81 @@ main {
   height: 320px;
 }
 
+/* 地面（草地の丘・奥） */
+.tree-container::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 72px;
+  background: linear-gradient(#86c057, #5f9438);
+  border-radius: 50% 50% 0 0 / 22px 22px 0 0;
+  box-shadow: inset 0 4px 10px rgba(255, 255, 255, 0.25);
+  z-index: 1;
+}
+
+/* 手前の草の縁（幹の根元にかぶせて植わって見せる） */
+.tree-container::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34px;
+  background: linear-gradient(#8ac559, #629a3a);
+  border-radius: 50% 50% 0 0 / 14px 14px 0 0;
+  z-index: 5;
+}
+
+/* 手前の木は地面より前に */
+.tree-center,
+.tree-left,
+.tree-right {
+  z-index: 2;
+}
+
+/* 奥に霞む木立 */
+.tree-back {
+  z-index: 0;
+  opacity: 0.5;
+  filter: blur(1px);
+}
+
+.tree-back .tree-canopy {
+  width: 120px;
+  height: 110px;
+  background-color: #82bd6a;
+  box-shadow: none;
+}
+
+.tree-back .tree-trunk {
+  width: 16px;
+  height: 46px;
+}
+
+.tree-back-1 {
+  bottom: 30px;
+  left: 20%;
+}
+
+.tree-back-2 {
+  bottom: 38px;
+  right: 18%;
+}
+
+.tree-back-3 {
+  bottom: 26px;
+  left: 40%;
+  opacity: 0.4;
+}
+
+.tree-back-3 .tree-canopy {
+  width: 95px;
+  height: 88px;
+  background-color: #93c879;
+}
+
 /* 木のスタイル */
 .tree {
   display: flex;
@@ -142,6 +223,34 @@ main {
 .tree-canopy {
   border-radius: 50%;
   position: relative;
+  isolation: isolate;
+  background-image: radial-gradient(circle at 38% 28%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 55%);
+  box-shadow: inset -10px -12px 26px rgba(0, 0, 0, 0.18);
+}
+
+/* 葉の塊（こんもりした立体感） */
+.tree-canopy::before,
+.tree-canopy::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background-color: inherit;
+  background-image: inherit;
+  z-index: -1;
+}
+
+.tree-canopy::before {
+  width: 68%;
+  height: 68%;
+  top: -20%;
+  left: 6%;
+}
+
+.tree-canopy::after {
+  width: 56%;
+  height: 56%;
+  top: -6%;
+  right: 2%;
 }
 
 .tree-center .tree-canopy {
@@ -166,8 +275,9 @@ main {
 }
 
 .tree-trunk {
-  background-color: #8B5E3C;
-  border-radius: 4px;
+  background: linear-gradient(90deg, #6e4a2b, #8a5e38 45%, #74502f);
+  border-radius: 3px 3px 0 0;
+  box-shadow: inset -3px 0 6px rgba(0, 0, 0, 0.25);
 }
 
 .tree-center .tree-trunk {
@@ -189,7 +299,8 @@ main {
 .tree-label {
   font-size: 22px;
   font-weight: bold;
-  color: #111;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
   position: absolute;
 }
 
@@ -355,14 +466,14 @@ main {
 
 /* フッター */
 footer {
-  border-top: 2px solid #999;
-  padding: 14px 16px;
+  border-top: 4px solid #5f9438;
+  padding: 18px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   font-size: 14px;
-  background-color: #c8e8a0;
+  background: linear-gradient(#9ac766, #79ad4f);
   text-align: center;
 }
 
