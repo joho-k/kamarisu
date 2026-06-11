@@ -192,6 +192,11 @@ main {
   z-index: 2;
 }
 
+/* ホバー時は前面に出して写真カードを隠さない */
+.tree-center:hover {
+  z-index: 30;
+}
+
 /* 奥に霞む木立 */
 .tree-back {
   z-index: 0;
@@ -360,37 +365,72 @@ main {
   transform: translate(-50%, -50%);
 }
 
-/* ホバー吹き出し */
+/* ホバー吹き出し（活動写真の木札風カード） */
 .speech-bubble {
   position: absolute;
-  background-color: #fff;
-  border: 2px solid #cc4400;
-  border-radius: 12px;
-  padding: 10px 14px;
-  font-size: 13px;
-  line-height: 1.6;
-  color: #333;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  width: 288px;
+  padding: 10px 12px 12px;
+  background: #fbf6ea;
+  border: 3px solid #6e9e3f;
+  border-radius: 14px;
+  box-shadow: 0 10px 20px rgba(40, 60, 20, 0.28);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s;
-  z-index: 10;
-  white-space: nowrap;
-  top: -70px;
-  right: -80px;
-  min-width: 160px;
+  transform: translateX(-50%) translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 20;
 }
 
 .speech-bubble::after {
   content: '';
   position: absolute;
-  bottom: -12px;
-  left: 20px;
-  border: 6px solid transparent;
-  border-top-color: #cc4400;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: #6e9e3f;
 }
 
-.tree:hover .speech-bubble {
+.speech-bubble-title {
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #3a6a35;
+  margin-bottom: 8px;
+}
+
+.speech-photos {
+  display: flex;
+  gap: 8px;
+}
+
+.speech-photos figure {
+  flex: 1;
+  margin: 0;
+}
+
+.speech-photos img {
+  display: block;
+  width: 100%;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #cbb083;
+}
+
+.speech-photos figcaption {
+  margin-top: 5px;
+  text-align: center;
+  font-size: 11px;
+  color: #5a4a33;
+}
+
+.tree-center:hover .speech-bubble {
   opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .profile-name {
