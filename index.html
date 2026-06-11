@@ -150,6 +150,24 @@
     <a href="https://www.facebook.com/kamaishirestart/" target="_blank" rel="noopener">Facebook</a>
   </footer>
 
+  <!-- メニューのリンクを選んだら閉じる -->
+  <script>
+    var navToggle = document.getElementById('nav-toggle');
+
+    document.querySelectorAll('.nav-links a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navToggle.checked = false;
+      });
+    });
+
+    // メニュー外をクリックしたら閉じる
+    document.addEventListener('click', function (e) {
+      if (navToggle.checked && !e.target.closest('nav')) {
+        navToggle.checked = false;
+      }
+    });
+  </script>
+
   <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v19.0">
   </script>
 </body>
