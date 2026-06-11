@@ -44,14 +44,10 @@ nav a:hover {
   gap: 4px;
 }
 
-.nav-logo-text {
-  font-size: 18px;
-  font-weight: bold;
-  color: #cc4400;
-  background-color: #fff8f0;
-  border: 2px solid #cc4400;
-  padding: 3px 10px;
-  border-radius: 2px;
+.nav-logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
 }
 
 /* メインコンテンツ */
@@ -61,14 +57,16 @@ main {
   padding: 20px 16px;
 }
 
-/* タイトル */
-h1 {
-  font-size: 52px;
-  font-weight: 900;
+/* タイトル画像 */
+.title-img-wrap {
   text-align: center;
-  color: #111;
   margin-bottom: 16px;
-  letter-spacing: 2px;
+}
+
+.title-img {
+  max-width: 480px;
+  width: 100%;
+  height: auto;
 }
 
 /* キャッチコピー */
