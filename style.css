@@ -52,6 +52,40 @@ nav a:hover {
   transform: translateY(-1px);
 }
 
+/* リンク群（PCでは横並び、そのまま） */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ハンバーガー（PCでは非表示） */
+.nav-toggle {
+  display: none;
+}
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 36px;
+  height: 32px;
+  padding: 5px 6px;
+  cursor: pointer;
+  background-color: #f4f1e0;
+  border: 2px solid #2c5230;
+  border-radius: 6px;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #2c5230;
+  border-radius: 2px;
+}
+
 .nav-logo {
   margin-left: auto;
   display: flex;
@@ -93,6 +127,11 @@ main {
   font-weight: bold;
   margin-bottom: 24px;
   color: #222;
+}
+
+/* スマホ専用の改行（PCでは無効） */
+.sp-br {
+  display: none;
 }
 
 /* 説明文 */
@@ -505,46 +544,120 @@ footer a:hover {
     font-size: 16px;
   }
 
+  .sp-br {
+    display: inline;
+  }
+
   .description {
     font-size: 16px;
   }
 
+  /* ナビ：リンクを隠してハンバーガー表示 */
+  .nav-hamburger {
+    display: flex;
+    margin-left: auto;
+    order: 2;
+  }
+
+  .nav-logo {
+    margin-left: 0;
+    order: 1;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-toggle:checked~.nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 10px 12px;
+    background: linear-gradient(#4a8042, #3a6a35);
+    border-bottom: 3px solid #2c5230;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-toggle:checked~.nav-links a {
+    text-align: center;
+  }
+
+  /* 木：背を高くして重ならないように */
   .tree-section {
-    min-height: 260px;
+    min-height: 360px;
   }
 
   .tree-container {
-    height: 260px;
+    height: 280px;
+  }
+
+  .tree-left {
+    left: 0;
+  }
+
+  .tree-right {
+    right: 0;
   }
 
   .tree-center .tree-canopy {
-    width: 150px;
-    height: 135px;
+    width: 156px;
+    height: 140px;
   }
 
   .tree-left .tree-canopy {
-    width: 120px;
-    height: 110px;
+    width: 112px;
+    height: 104px;
   }
 
   .tree-right .tree-canopy {
-    width: 110px;
-    height: 100px;
+    width: 104px;
+    height: 96px;
   }
 
   .tree-center .tree-trunk {
-    height: 55px;
+    height: 96px;
   }
 
   .tree-left .tree-trunk {
-    height: 48px;
+    height: 60px;
   }
 
   .tree-right .tree-trunk {
-    height: 44px;
+    height: 52px;
   }
 
   .tree-label {
     font-size: 16px;
+  }
+
+  /* プロフィール：吹き出しを写真の下に */
+  .profile-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-bubble-wrap {
+    width: 100%;
+  }
+
+  .profile-bubble::before {
+    left: 50%;
+    top: -18px;
+    transform: translateX(-50%);
+    border-color: transparent;
+    border-bottom-color: #888;
+  }
+
+  .profile-bubble::after {
+    left: 50%;
+    top: -14px;
+    transform: translateX(-50%);
+    border-color: transparent;
+    border-bottom-color: #fff;
   }
 }
