@@ -497,9 +497,17 @@ main {
   border: 2px solid #cc4400;
   background-color: #fff8f0;
   padding: 8px;
-  display: inline-block;
-  max-width: 100%;
+  display: block;
+  width: 100%;
+  text-align: center;
   overflow: hidden;
+}
+
+/* 埋め込み本体を枠の幅に合わせて中央に */
+.fb-embed-wrapper .fb-page,
+.fb-embed-wrapper .fb-page span,
+.fb-embed-wrapper .fb-page iframe {
+  max-width: 100% !important;
 }
 
 /* フッター */
