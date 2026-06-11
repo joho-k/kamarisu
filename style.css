@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 54px;
+}
+
 body {
   font-family: "Zen Maru Gothic", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
   background-color: #d4edaa;
@@ -237,6 +242,10 @@ main {
 
 .tree:hover .speech-bubble {
   opacity: 1;
+}
+
+.profile-name {
+  font-size: 25px;
 }
 
 /* プロフィールセクション */
