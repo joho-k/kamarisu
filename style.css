@@ -141,11 +141,21 @@ main {
   margin-bottom: 32px;
 }
 
+/* スマホ向けの操作ヒント */
+.tree-hint {
+  display: none;
+  margin: -8px 0 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #3a6a35;
+}
+
 /* ツリーセクション */
 .tree-section {
   position: relative;
   width: 100%;
-  min-height: 320px;
+  min-height: 500px;
   margin-bottom: 32px;
 }
 
@@ -155,7 +165,7 @@ main {
   align-items: flex-end;
   gap: 0;
   position: relative;
-  height: 320px;
+  height: 500px;
 }
 
 /* 地面（草地の丘・奥） */
@@ -182,7 +192,7 @@ main {
   height: 34px;
   background: linear-gradient(#8ac559, #629a3a);
   border-radius: 50% 50% 0 0 / 14px 14px 0 0;
-  z-index: 5;
+  z-index: 40;
 }
 
 /* 手前の木は地面より前に */
@@ -193,7 +203,9 @@ main {
 }
 
 /* ホバー時は前面に出して写真カードを隠さない */
-.tree-center:hover {
+.tree-center:hover,
+.tree-left:hover,
+.tree.is-open {
   z-index: 30;
 }
 
@@ -368,10 +380,10 @@ main {
 /* ホバー吹き出し（活動写真の木札風カード） */
 .speech-bubble {
   position: absolute;
-  bottom: calc(100% + 16px);
+  bottom: 0;
   left: 50%;
-  width: 288px;
-  padding: 10px 12px 12px;
+  width: 520px;
+  padding: 14px;
   background: #fbf6ea;
   border: 3px solid #6e9e3f;
   border-radius: 14px;
@@ -396,7 +408,7 @@ main {
 .speech-bubble-title {
   display: block;
   text-align: center;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
   color: #3a6a35;
   margin-bottom: 8px;
@@ -415,22 +427,65 @@ main {
 .speech-photos img {
   display: block;
   width: 100%;
-  height: 92px;
+  height: 250px;
   object-fit: cover;
   border-radius: 8px;
   border: 2px solid #cbb083;
 }
 
 .speech-photos figcaption {
-  margin-top: 5px;
+  margin-top: 8px;
   text-align: center;
-  font-size: 11px;
+  font-size: 14px;
+  line-height: 1.6;
   color: #5a4a33;
 }
 
-.tree-center:hover .speech-bubble {
+.speech-caption {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #5a4a33;
+}
+
+.speech-photo-title {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #3a6a35;
+}
+
+.tree-center.is-open .speech-bubble {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+/* 左の木の吹き出しは左端に寄せて画面外にはみ出さないように */
+.tree-left .speech-bubble {
+  left: 0;
+  transform: translateY(8px);
+}
+
+.tree-left .speech-bubble::after {
+  left: 85px;
+}
+
+.tree-left.is-open .speech-bubble {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* マウス操作のできる端末だけホバーでも表示（タップの邪魔をしない） */
+@media (hover: hover) {
+  .tree-center:hover .speech-bubble {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .tree-left:hover .speech-bubble {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .profile-name {
@@ -632,11 +687,11 @@ footer a:hover {
 
   /* 木：背を高くして重ならないように */
   .tree-section {
-    min-height: 360px;
+    min-height: 540px;
   }
 
   .tree-container {
-    height: 280px;
+    height: 460px;
   }
 
   .tree-left {
@@ -676,6 +731,24 @@ footer a:hover {
 
   .tree-label {
     font-size: 16px;
+  }
+
+  .tree-hint {
+    display: block;
+  }
+
+  /* 吹き出し：画面幅に収める */
+  .speech-bubble {
+    width: min(520px, calc(100vw - 24px));
+    padding: 12px;
+  }
+
+  .speech-photos img {
+    height: 170px;
+  }
+
+  .tree-left .speech-bubble::after {
+    left: 56px;
   }
 
   /* プロフィール：吹き出しを写真の下に */

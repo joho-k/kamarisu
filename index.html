@@ -51,6 +51,7 @@
     <!-- ツリーセクション -->
     <div class="tree-section">
       <h2>活動内容</h2>
+      <p class="tree-hint">タップで詳細が見られます！</p>
       <div class="tree-container">
 
         <!-- 奥に霞む木立 -->
@@ -68,7 +69,7 @@
         </div>
 
         <!-- 中央の木：学習支援 -->
-        <div class="tree tree-center">
+        <div class="tree tree-center has-bubble">
           <div class="tree-canopy">
             <span class="tree-label">学習支援</span>
             <div class="speech-bubble">
@@ -76,11 +77,17 @@
               <div class="speech-photos">
                 <figure>
                   <img src="img/activities/study.jpeg" alt="個別学習支援">
-                  <figcaption>個別学習支援</figcaption>
+                  <figcaption>
+                    <span class="speech-photo-title">個別学習支援</span>
+                    マンツーマンで利用者にあった学びをサポートします。
+                  </figcaption>
                 </figure>
                 <figure>
                   <img src="img/activities/study2.jpeg" alt="自習サポート">
-                  <figcaption>自習サポート</figcaption>
+                  <figcaption>
+                    <span class="speech-photo-title">自習サポート</span>
+                    自分で課題を進め、困ったときに適時アドバイス
+                  </figcaption>
                 </figure>
               </div>
             </div>
@@ -89,9 +96,24 @@
         </div>
 
         <!-- 左の木：居場所支援 -->
-        <div class="tree tree-left">
+        <div class="tree tree-left has-bubble">
           <div class="tree-canopy">
             <span class="tree-label">居場所支援</span>
+            <div class="speech-bubble">
+              <span class="speech-bubble-title">🌿 活動の様子</span>
+              <div class="speech-photos">
+                <figure>
+                  <img src="img/activities/farm.jpeg" alt="畑仕事ボランティア">
+                </figure>
+                <figure>
+                  <img src="img/activities/farm2.jpeg" alt="畑仕事ボランティア">
+                </figure>
+              </div>
+              <p class="speech-caption">
+                <span class="speech-photo-title">畑仕事ボランティア</span>
+                さんつな自然学校とコラボして、近隣の畑を耕し自分の好きな作物の苗を植える活動を行いました。
+              </p>
+            </div>
           </div>
           <div class="tree-trunk"></div>
         </div>
@@ -158,6 +180,27 @@
       link.addEventListener('click', function () {
         navToggle.checked = false;
       });
+    });
+
+    // 木をタップで活動写真の開閉（スマホ向け）
+    var bubbleTrees = document.querySelectorAll('.tree.has-bubble');
+
+    bubbleTrees.forEach(function (tree) {
+      tree.addEventListener('click', function (e) {
+        // 吹き出しの中をタップしたときは閉じない
+        if (e.target.closest('.speech-bubble')) return;
+
+        var opened = tree.classList.contains('is-open');
+        bubbleTrees.forEach(function (t) { t.classList.remove('is-open'); });
+        if (!opened) tree.classList.add('is-open');
+      });
+    });
+
+    // 木の外をタップしたら閉じる
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.tree.has-bubble')) {
+        bubbleTrees.forEach(function (t) { t.classList.remove('is-open'); });
+      }
     });
 
     // メニュー外をクリックしたら閉じる
