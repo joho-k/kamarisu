@@ -205,6 +205,7 @@ main {
 /* ホバー時は前面に出して写真カードを隠さない */
 .tree-center:hover,
 .tree-left:hover,
+.tree-right:hover,
 .tree.is-open {
   z-index: 30;
 }
@@ -475,6 +476,24 @@ main {
   transform: translateY(0);
 }
 
+/* 右の木の吹き出しは右端に寄せて画面外にはみ出さないように */
+.tree-right .speech-bubble {
+  left: auto;
+  right: 0;
+  transform: translateY(8px);
+}
+
+.tree-right .speech-bubble::after {
+  left: auto;
+  right: 72px;
+  transform: none;
+}
+
+.tree-right.is-open .speech-bubble {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* マウス操作のできる端末だけホバーでも表示（タップの邪魔をしない） */
 @media (hover: hover) {
   .tree-center:hover .speech-bubble {
@@ -482,7 +501,8 @@ main {
     transform: translateX(-50%) translateY(0);
   }
 
-  .tree-left:hover .speech-bubble {
+  .tree-left:hover .speech-bubble,
+  .tree-right:hover .speech-bubble {
     opacity: 1;
     transform: translateY(0);
   }
@@ -749,6 +769,10 @@ footer a:hover {
 
   .tree-left .speech-bubble::after {
     left: 56px;
+  }
+
+  .tree-right .speech-bubble::after {
+    right: 44px;
   }
 
   /* プロフィール：吹き出しを写真の下に */
