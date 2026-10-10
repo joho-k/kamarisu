@@ -645,6 +645,11 @@ main {
   flex-wrap: wrap;
 }
 
+.profile-section h2 {
+  width: 100%;
+  margin-bottom: 0;
+}
+
 .profile-photo {
   width: 130px;
   height: 130px;
