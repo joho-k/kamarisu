@@ -141,14 +141,48 @@ main {
   margin-bottom: 32px;
 }
 
-/* スマホ向けの操作ヒント */
+/* 木の上の空きスペースに浮かぶ雲の操作ヒント */
 .tree-hint {
-  display: none;
-  margin: -8px 0 0;
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  width: 300px;
+  aspect-ratio: 348 / 132;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 22px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='28 0 348 132'%3E%3Cdefs%3E%3ClinearGradient id='g' gradientUnits='userSpaceOnUse' x1='0' y1='0' x2='0' y2='132'%3E%3Cstop offset='0.45' stop-color='%23ffffff'/%3E%3Cstop offset='1' stop-color='%23dcebf5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='url(%23g)'%3E%3Crect x='40' y='70' width='320' height='60' rx='30'/%3E%3Ccircle cx='70' cy='92' r='38'/%3E%3Ccircle cx='130' cy='68' r='48'/%3E%3Ccircle cx='205' cy='55' r='55'/%3E%3Ccircle cx='280' cy='66' r='46'/%3E%3Ccircle cx='335' cy='90' r='38'/%3E%3C/g%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 6px 8px rgba(70, 110, 140, 0.22));
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 1.6;
   font-weight: 700;
   color: #3a6a35;
+  animation: hint-float 4s ease-in-out infinite;
+  transition: opacity 0.25s ease;
+}
+
+.hint-mouse {
+  display: none;
+}
+
+/* 吹き出しを開いている間はヒントを隠す */
+.tree-section:has(.tree.is-open) .tree-hint {
+  opacity: 0;
+}
+
+@keyframes hint-float {
+  0%, 100% { margin-left: 0; }
+  50% { margin-left: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tree-hint {
+    animation: none;
+  }
 }
 
 /* ツリーセクション */
@@ -496,6 +530,18 @@ main {
 
 /* マウス操作のできる端末だけホバーでも表示（タップの邪魔をしない） */
 @media (hover: hover) {
+  .hint-touch {
+    display: none;
+  }
+
+  .hint-mouse {
+    display: inline;
+  }
+
+  .tree-section:has(.tree:hover) .tree-hint {
+    opacity: 0;
+  }
+
   .tree-center:hover .speech-bubble {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
@@ -512,6 +558,130 @@ main {
   font-size: 25px;
 }
 
+/* 対象者・活動場所 */
+.info-section {
+  margin-bottom: 40px;
+}
+
+/* 対象者：木札風のボードに葉っぱ形のラベル */
+.info-board {
+  background: #fbf6ea;
+  border: 3px solid #6e9e3f;
+  border-radius: 14px;
+  box-shadow: 0 6px 14px rgba(40, 60, 20, 0.18);
+  padding: 20px 16px 12px;
+}
+
+.leaf-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.leaf {
+  flex: 1 1 180px;
+  max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 110px;
+  padding: 16px 14px;
+  border-radius: 60% 6% 60% 6%;
+  background-image: radial-gradient(circle at 38% 28%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 60%);
+  box-shadow: inset -6px -8px 16px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.leaf-1 {
+  background-color: #8dc44a;
+}
+
+.leaf-2 {
+  background-color: #6ab04c;
+}
+
+.leaf-3 {
+  background-color: #78b840;
+}
+
+.leaf-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.leaf-sub {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.info-note {
+  margin-top: 8px;
+  text-align: right;
+  font-size: 14px;
+  color: #5a4a33;
+}
+
+/* 活動場所：木の立て看板 */
+.signpost-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.signpost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 看板の支柱 */
+.signpost::after {
+  content: '';
+  width: 12px;
+  height: 34px;
+  background: linear-gradient(90deg, #6e4a2b, #8a5e38 45%, #74502f);
+  box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.25);
+}
+
+.signpost-board {
+  width: 100%;
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 8px;
+  background: linear-gradient(#a7774a, #8a5e38);
+  border: 3px solid #6e4a2b;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.2), 0 6px 12px rgba(40, 30, 10, 0.25);
+  text-align: center;
+}
+
+.signpost-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fbf6ea;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.signpost-area {
+  font-size: 12px;
+  font-weight: 700;
+  color: #5a4a33;
+  background: #fbf6ea;
+  border-radius: 999px;
+  padding: 1px 12px;
+}
+
 /* プロフィールセクション */
 .profile-section {
   display: flex;
@@ -519,6 +689,11 @@ main {
   align-items: flex-start;
   margin-bottom: 24px;
   flex-wrap: wrap;
+}
+
+.profile-section h2 {
+  width: 100%;
+  margin-bottom: 0;
 }
 
 .profile-photo {
@@ -581,31 +756,6 @@ main {
 .fb-embed-section {
   margin-top: 32px;
   margin-bottom: 8px;
-}
-
-.fb-embed-section h2 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 12px;
-  color: #333;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.fb-embed-section h2::before {
-  content: 'f';
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  background-color: #1877f2;
-  color: #fff;
-  font-family: Georgia, serif;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 4px;
 }
 
 .fb-embed-wrapper {
@@ -753,10 +903,6 @@ footer a:hover {
     font-size: 16px;
   }
 
-  .tree-hint {
-    display: block;
-  }
-
   /* 吹き出し：画面幅に収める */
   .speech-bubble {
     width: min(520px, calc(100vw - 24px));
@@ -773,6 +919,11 @@ footer a:hover {
 
   .tree-right .speech-bubble::after {
     right: 44px;
+  }
+
+  /* 活動場所：2列に */
+  .signpost-list {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   /* プロフィール：吹き出しを写真の下に */
